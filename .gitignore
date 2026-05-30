@@ -1,0 +1,336 @@
+## .gitignore para .NET 9 + Visual Studio 2022
+## Gerado para uso com C#, ASP.NET Core, WPF, WinForms, MAUI, Blazor, etc.
+
+# ============================================================
+# VISUAL STUDIO
+# ============================================================
+
+# Arquivos de usuário
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Arquivos de configuração local do VS
+*.rsuser
+
+# Mono auto-tuning
+mono_crash.*
+
+# Histórico de build e compilação
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# ============================================================
+# .NET / MSBuild
+# ============================================================
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Pasta de cache do NuGet local
+.nuget/
+
+# MSBuild
+*.TargetFrameworks.props
+
+# Resultados de testes
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Cobertura de código
+*.coverage
+*.coveragexml
+coverage*/
+**/coverage.json
+**/coverage.opencover.xml
+**/coverage.cobertura.xml
+TestResults/
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# .NET CLI / SDK
+global.json.bak
+dotnet-tools.json.bak
+
+# Runtime
+*.runtimeconfig.dev.json
+
+# ============================================================
+# PUBLISH / DEPLOY
+# ============================================================
+
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.pubxml.user
+PublishScripts/
+
+# Azure
+ServiceFabricBackup/
+*.mfractor
+
+# ============================================================
+# ROSLYN / ANALISADORES
+# ============================================================
+
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# ============================================================
+# RESHARPER
+# ============================================================
+
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ============================================================
+# RIDER (JetBrains)
+# ============================================================
+
+.idea/
+*.sln.iml
+
+# ============================================================
+# DOTCOVER / DOTMEMORY / DOTPEEK / DOTTRACE
+# ============================================================
+
+*.dotCover
+
+# ============================================================
+# VISUAL STUDIO CODE
+# ============================================================
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+# ============================================================
+# WINDOWS
+# ============================================================
+
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ============================================================
+# MACOS
+# ============================================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ============================================================
+# LINUX
+# ============================================================
+
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================
+# ASP.NET / ASPNETCORE
+# ============================================================
+
+# Arquivos de configuração sensíveis (não versionar!)
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.*.local.json
+
+# Certificados de desenvolvimento HTTPS
+*.pfx
+*.p12
+
+# Arquivos de saída de scaffolding
+ScaffoldingReadMe.txt
+
+# Static Web Assets
+wwwroot/dist/
+wwwroot/lib/
+
+# ============================================================
+# BLAZOR / WASM
+# ============================================================
+
+wwwroot/_framework/
+
+# ============================================================
+# MAUI
+# ============================================================
+
+**/*.xcarchive
+**/*.ipa
+**/*.apk
+**/*.aab
+**/*.dSYM.zip
+**/*.dSYM
+
+# ============================================================
+# ENTITY FRAMEWORK
+# ============================================================
+
+*.mdf
+*.ldf
+*.ndf
+
+# ============================================================
+# SQL SERVER / LOCALDB
+# ============================================================
+
+*.mdf
+*.ldf
+*.bak
+*.bak.zip
+
+# ============================================================
+# NODE / FRONTEND (se usar npm/yarn no projeto)
+# ============================================================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.pnp.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# ============================================================
+# DOCKER
+# ============================================================
+
+.dockerignore
+
+# ============================================================
+# AZURE / CI-CD
+# ============================================================
+
+# Azure Functions
+local.settings.json
+
+# ============================================================
+# SEGREDOS / CONFIGURAÇÕES SENSÍVEIS
+# ============================================================
+
+# NUNCA versionar esses arquivos!
+*.env
+*.env.*
+!*.env.example
+secrets.json
+secrets.*.json
+**/*secrets*
+**/*secret*
+**/*password*
+**/*credentials*
+.secrets/
+
+# User Secrets do .NET
+# (ficam em %APPDATA%\Microsoft\UserSecrets, mas por segurança:)
+secrets.json
+
+# ============================================================
+# RELATÓRIOS E TEMPORÁRIOS
+# ============================================================
+
+*.tmp
+*.temp
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.cache
+[Tt]emp/
+[Tt]mp/
+
+# ============================================================
+# LICENÇA E GERAÇÃO DE CÓDIGO
+# ============================================================
+
+# StyleCop
+StyleCopReport.xml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# Backup de arquivos do VS
+**/*.orig
+
+# Arquivos de travamento de esquema XML
+*.xsd.bak
+
+# ============================================================
+# OUTROS IDES E FERRAMENTAS
+# ============================================================
+
+# Sublime Text
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+!*.svg
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Viewsession.vim
+.netrwhist
+tags
+[._]*.un~
