@@ -8,6 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.16" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SemanaAcademica.Application\SemanaAcademica.Application.csproj" />
+    <ProjectReference Include="..\SemanaAcademica.CrossCutting\SemanaAcademica.CrossCutting.csproj" />
+    <ProjectReference Include="..\SemanaAcademica.Domain\SemanaAcademica.Domain.csproj" />
+    <ProjectReference Include="..\SemanaAcademica.Infra\SemanaAcademica.Infra.csproj" />
+    <ProjectReference Include="..\SemanaAcademica.Test\SemanaAcademica.Test.csproj" />
   </ItemGroup>
 
 </Project>

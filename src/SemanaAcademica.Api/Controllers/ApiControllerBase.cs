@@ -1,67 +1,51 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SemanaAcademica.Domain.Notifications;
 
 namespace SemanaAcademica.Api.Controllers
 {
     [ApiController]
-    public class ApiControllerBase : ControllerBase
+    public abstract class ApiControllerBase : ControllerBase
     {
-        [ApiController]
-        public abstract class ApiControllerBase : ControllerBase
+        private readonly NotificationContext _notificationHandler;
+
+        protected ApiControllerBase(NotificationContext notificationHandler)
         {
-            private readonly NotificationContext _notificationHandler;
+            _notificationHandler = notificationHandler;
+        }
 
-            protected ApiControllerBase(NotificationContext notificationHandler)
+        protected ActionResult CustomResponse(object? result = null)
+        {
+            if (!_notificationHandler.HasNotifications)
             {
-                _notificationHandler = notificationHandler;
+                if (!ModelState.IsValid)
+                    AddModelErrors();
+
+                if (_notificationHandler.HasNotifications)
+                    return BadRequest(_notificationHandler.Notifications);
+
+                return result is null ? Ok() : Ok(result);
             }
 
-            /// <summary>
-            /// Retorna 200 OK com o resultado (ou apenas 200 se result for null)
-            /// ou 400 BadRequest com a lista de notificações.
-            /// </summary>
-            protected ActionResult CustomResponse(object? result = null)
-            {
-                if (!_notificationHandler.HasNotifications)
-                {
-                    // Se vier um ModelState inválido, adiciona erros de model binding
-                    if (!ModelState.IsValid)
-                        AddModelErrors();
+            return BadRequest(_notificationHandler.Notifications);
+        }
 
-                    if (_notificationHandler.HasNotifications)
-                        return BadRequest(_notificationHandler.Notifications);
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
+        {
+            AddModelErrors(modelState);
+            return CustomResponse();
+        }
 
-                    return result is null
-                        ? Ok()
-                        : Ok(result);
-                }
+        private void AddModelErrors() => AddModelErrors(ModelState);
 
-                return BadRequest(_notificationHandler.Notifications);
-            }
+        private void AddModelErrors(ModelStateDictionary modelState)
+        {
+            var errors = modelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage);
 
-            /// <summary>
-            /// Quando você quer retornar um BadRequest a partir de um ModelState inválido
-            /// </summary>
-            protected ActionResult CustomResponse(ModelStateDictionary modelState)
-            {
-                AddModelErrors(modelState);
-                return CustomResponse();
-            }
-
-            private void AddModelErrors()
-            {
-                AddModelErrors(ModelState);
-            }
-
-            private void AddModelErrors(ModelStateDictionary modelState)
-            {
-                var errors = modelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage);
-
-                foreach (var msg in errors)
-                    _notificationHandler.AddNotification("", msg);
-            }
+            foreach (var msg in errors)
+                _notificationHandler.AddNotification("", msg);
         }
     }
 }
