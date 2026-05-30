@@ -18,4 +18,13 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contexts\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Integration\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Scenarios\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
