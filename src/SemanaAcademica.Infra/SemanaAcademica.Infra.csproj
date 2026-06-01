@@ -7,15 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Repositories\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.16" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.16" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.16" />
+    <ProjectReference Include="..\SemanaAcademica.Domain\SemanaAcademica.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,20 +1,39 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SemanaAcademica.Application.Contracts;
+using SemanaAcademica.Application.Model.Auth;
 using SemanaAcademica.Domain.Notifications;
 
 namespace SemanaAcademica.Api.Controllers
 {
-    [Authorize]
-    [Route("login")]
-    [ApiController]
+    [Route("api/auth")]
     public class AuthController : ApiControllerBase
     {
-        private readonly NotificationContext _notification;
+        private readonly IUserApplicationService _userApplicationService;
 
-        public AuthController(NotificationContext notification) 
-            : base(notification)
+        public AuthController(
+            IUserApplicationService userApplicationService,
+            NotificationContext notification)
+            
         {
-            _notification = notification;
+            _userApplicationService = userApplicationService;
+        }
+
+        /// <summary>
+        /// Autentica o usuário e retorna o token de acesso
+        /// </summary>
+        /// <param name="model">Credenciais do usuário</param>
+        /// <returns>Token de acesso</returns>
+        [HttpPost]
+        [ProducesResponseType(typeof(AccessModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Post([FromBody] AccessModel model)
+        {
+            var result = await _userApplicationService.GetAccessAsync(model);
+
+            if (result is null)
+                return CustomResponse();
+
+            return CustomResponse(new { Token = result });
         }
     }
 }

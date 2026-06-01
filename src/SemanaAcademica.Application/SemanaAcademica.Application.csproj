@@ -1,16 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Model\" />
-    <Folder Include="Profile\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SemanaAcademica.CrossCutting\SemanaAcademica.CrossCutting.csproj" />
+		<ProjectReference Include="..\SemanaAcademica.Domain\SemanaAcademica.Domain.csproj" />
+	</ItemGroup>
 </Project>

@@ -8,31 +8,33 @@ namespace SemanaAcademica.CrossCutting.Security.Service
 {
     public class AccessTokenService
     {
-        private readonly AccessTokenSettings JwtSettings;
+        private readonly AccessTokenSettings _jwtSettings;
 
         public AccessTokenService(AccessTokenSettings jwtSettings)
         {
-            this.JwtSettings = jwtSettings;
+            _jwtSettings = jwtSettings;
         }
 
-        public string GenerateToken(string username)
+        public string GenerateToken(string email)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(JwtSettings.SecretKey ?? throw new NullReferenceException("SecretKey Nulo"));
+            var key = Encoding.UTF8.GetBytes(_jwtSettings.SecretKey
+                ?? throw new InvalidOperationException("SecretKey não configurada."));
 
-            var tokenDescription = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim(ClaimTypes.Name, email)
                 }),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = new SigningCredentials
-                        (new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature)
+                IssuedAt = DateTime.UtcNow,
+                Expires = DateTime.UtcNow.AddHours(_jwtSettings.ExpirationInHours),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256)
             };
 
-            var token = tokenHandler.CreateToken(tokenDescription);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
     }
