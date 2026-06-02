@@ -12,8 +12,7 @@ namespace SemanaAcademica.Api.Controllers
 
         public AuthController(
             IUserApplicationService userApplicationService,
-            NotificationContext notification)
-            
+            NotificationContext notification) : base(notification)
         {
             _userApplicationService = userApplicationService;
         }
